@@ -21,7 +21,7 @@ export const navSections: NavSection[] = [
     label: 'Landings',
     href: '#',
     items: [
-      { label: 'ICO', to: '/', nav: 'landings' },
+      { label: 'ICO', to: '/ico', nav: 'landings' },
       { label: 'Crypto Wallet' },
       { label: 'Fintech Company' },
       { label: 'Crypto Blog' },

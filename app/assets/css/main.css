@@ -38,6 +38,7 @@
   --animate-reveal-up-slow: ico-reveal-from-up 1.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   --animate-reveal-left: ico-reveal-from-left 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   --animate-reveal-right: ico-reveal-from-right 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-scroll-hint-dot: dojo-scroll-hint-dot 2s linear infinite;
 }
 
 @keyframes preloader-circle-inner {
@@ -123,6 +124,18 @@
   }
 }
 
+@keyframes dojo-scroll-hint-dot {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+  }
+}
+
 @layer base {
   *,
   *::before,
@@ -137,19 +150,6 @@
     background-color: #ffffff;
     color: #ffffff;
     font-family: var(--font-rubik);
-  }
-}
-
-@layer components {
-  .btn-fa-icon {
-    display: block;
-    font-size: 12px;
-    line-height: 1;
-  }
-
-  .btn-icon-holder .btn-fa-icon::before {
-    display: block;
-    line-height: 1;
   }
 }
 

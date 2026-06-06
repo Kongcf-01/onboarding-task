@@ -216,12 +216,17 @@ const userNavSelection = ref<NavId | null>(null)
 const activeNavState = computed<NavId | null>(() => {
   if (props.activeNav) return props.activeNav
   if (route.path === '/ico' || route.path.startsWith('/ico/')) return 'landings'
-  if (route.path === '/' && props.variant === 'ico') return 'landings'
+  if (route.path === '/') return props.variant === 'ico' ? 'landings' : 'home'
   if (userNavSelection.value !== null) return userNavSelection.value
   return null
 })
 
 function desktopLinkClass(active: boolean) {
+  if (props.variant === 'default') {
+    return active
+      ? 'text-dojo-orange'
+      : 'text-white hover:text-dojo-orange'
+  }
   return active
     ? 'text-ico-red'
     : 'text-white hover:text-ico-red'

@@ -43,10 +43,10 @@ export function useIcoScrollReveal(rootRef: Ref<HTMLElement | null>) {
     revealedItems.add(el)
 
     if (isRevealEl(el)) {
-      scheduleVisible(el)
+      scheduleVisible(el, getRevealDelayMs(el))
     }
     queryRevealEls(el).forEach((child) => {
-      scheduleVisible(child)
+      scheduleVisible(child, getRevealDelayMs(child))
     })
   }
 
@@ -113,7 +113,7 @@ export function useIcoScrollReveal(rootRef: Ref<HTMLElement | null>) {
       if (group) {
         revealGroup(root, group)
       } else if (isRevealEl(el)) {
-        scheduleVisible(el)
+        scheduleVisible(el, getRevealDelayMs(el))
       }
     }
   }

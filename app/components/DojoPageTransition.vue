@@ -36,8 +36,8 @@
       </div>
       <div class="pointer-events-none absolute inset-0 z-[1] overflow-hidden">
         <div
-          class="absolute -left-[5%] -right-[5%] bottom-0 h-[115%] origin-bottom skew-y-[-2.5deg] bg-ico-red will-change-transform"
-          :class="showCurtain ? 'animate-preloader-curtain-sweep' : 'translate-y-full'"
+          v-if="showCurtain"
+          class="absolute -left-[5%] -right-[5%] bottom-0 h-[115%] origin-bottom skew-y-[-2.5deg] bg-ico-red will-change-transform animate-preloader-curtain-sweep"
         />
       </div>
     </div>

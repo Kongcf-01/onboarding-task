@@ -30,9 +30,11 @@ const isHovering = ref(false)
 const inSideMenu = ref(false)
 
 const LIGHT_SECTION_SELECTOR =
-  'section[class*="bg-ico-bg-light"], section[class*="bg-white"]'
+  'section[class*="bg-ico-bg-light"], section[class*="bg-white"], section[class*="bg-[#f4f4f4]"]'
 
 const SIDE_MENU_SELECTOR = '#dojochain-side-menu'
+
+const SCROLL_RAIL_SELECTOR = '#dojo-scroll-hint, #dojo-scroll-gotop'
 
 const HOVER_TARGET_SELECTOR =
   'a, button, [role="button"], input, select, textarea, label, .nav-link, .whitepaper-btn, .icon-link, .menu-toggle'
@@ -42,8 +44,10 @@ const isIcoHome = computed(() => {
   return path === '/' || path === '/coming-soon'
 })
 
+const inScrollRail = ref(false)
+
 const showCursor = computed(
-  () => ready.value && hasMoved.value && isIcoHome.value && !inSideMenu.value,
+  () => ready.value && hasMoved.value && isIcoHome.value && !inSideMenu.value && !inScrollRail.value,
 )
 
 function updateRingTone(clientX: number, clientY: number, target?: EventTarget | null) {
@@ -51,6 +55,7 @@ function updateRingTone(clientX: number, clientY: number, target?: EventTarget |
     (target as Element | null)
     ?? document.elementFromPoint(clientX, clientY)
   inSideMenu.value = !!el?.closest?.(SIDE_MENU_SELECTOR)
+  inScrollRail.value = !!el?.closest?.(SCROLL_RAIL_SELECTOR)
   onLightBg.value = !!el?.closest?.(LIGHT_SECTION_SELECTOR)
   isHovering.value = !!el?.closest?.(HOVER_TARGET_SELECTOR)
 }
@@ -65,6 +70,7 @@ function onMove(e: MouseEvent) {
 function onLeave() {
   hasMoved.value = false
   inSideMenu.value = false
+  inScrollRail.value = false
   onLightBg.value = false
   isHovering.value = false
 }
@@ -83,6 +89,7 @@ function stop() {
   ready.value = false
   hasMoved.value = false
   inSideMenu.value = false
+  inScrollRail.value = false
   onLightBg.value = false
   isHovering.value = false
   window.removeEventListener('mousemove', onMove)

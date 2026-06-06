@@ -2,7 +2,7 @@
   <a
     :href="href"
     v-bind="$attrs"
-    class="group relative inline-flex min-h-[52px] items-center rounded-full py-3.5 pl-6 pr-[60px] text-left font-rubik text-base font-semibold leading-normal tracking-normal no-underline transition-[background,color] duration-200 max-lg:py-3.5 max-lg:pl-5 max-lg:pr-[52px] max-lg:text-[15px]"
+    class="group relative inline-flex min-h-[52px] origin-center items-center rounded-full py-3.5 pl-6 pr-[60px] text-left font-rubik text-base font-semibold leading-normal tracking-normal no-underline transition-[background,color,transform] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] hover:scale-[1.05] max-lg:py-3.5 max-lg:pl-5 max-lg:pr-[52px] max-lg:text-[15px]"
     :class="
       variant === 'light'
         ? 'bg-ico-cream text-[#182a3f] hover:text-ico-red'
@@ -13,7 +13,7 @@
       <slot>{{ label }}</slot>
     </span>
     <span
-      class="btn-icon-holder absolute top-1/2 right-[15px] size-8 -translate-y-1/2 overflow-hidden rounded-full text-center"
+      class="absolute top-1/2 right-[15px] size-8 -translate-y-1/2 overflow-hidden rounded-full text-center transition-[background-color] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
       :class="
         variant === 'light'
           ? 'bg-[rgba(24,42,63,0.12)] text-[#182a3f] group-hover:bg-black/20'
@@ -22,16 +22,16 @@
       aria-hidden="true"
     >
       <span
-        class="btn-icon-track flex w-8 flex-col transition-none group-hover:-translate-y-8 group-hover:transition-transform group-hover:duration-350 group-hover:ease-[cubic-bezier(0.23,1,0.32,1)]"
+        class="flex w-8 flex-col transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:-translate-y-8"
         style="height: 64px"
       >
         <span class="grid size-8 shrink-0 place-items-center">
-          <i :class="icon" class="btn-fa-icon" aria-hidden="true" />
+          <i :class="icon" class="block text-xs leading-none before:block before:leading-none" aria-hidden="true" />
         </span>
         <span class="grid size-8 shrink-0 place-items-center">
           <i
             :class="[icon, variant === 'light' ? 'group-hover:text-white' : '']"
-            class="btn-fa-icon"
+            class="block text-xs leading-none before:block before:leading-none"
             aria-hidden="true"
           />
         </span>
