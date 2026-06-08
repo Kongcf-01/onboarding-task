@@ -3,18 +3,15 @@
     <!-- Desktop + mobile header -->
     <header
       id="header"
-      class="fixed inset-x-0 top-0 z-[100] overflow-visible py-5 transition-all duration-350 ease-out"
+      class="fixed inset-x-0 top-0 z-[100] overflow-visible py-5 transition-[background-color,box-shadow] duration-350 ease-out"
       :class="[
         isScrolled
-          ? 'bg-[#111] py-3.5 shadow-[0_2px_12px_rgba(0,0,0,0.35)]'
-          : variant === 'ico'
-            ? 'bg-transparent py-5 shadow-none min-[992px]:py-10'
-            : 'bg-transparent shadow-none',
+          ? 'bg-[#111] shadow-[0_2px_12px_rgba(0,0,0,0.35)]'
+          : 'bg-transparent shadow-none',
         variant === 'ico' && !isScrolled
           ? 'after:pointer-events-none after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:bg-ico-blue-dark/20'
           : '',
         variant === 'ico' && isScrolled ? 'shadow-[0_1px_20px_rgba(0,0,0,0.1)]' : '',
-        variant === 'ico' && isScrolled ? 'min-[1270px]:[&_.header-inner]:min-h-[110.38px] min-[1270px]:[&_.header-inner]:py-[30.19px]' : '',
       ]"
     >
       <div class="w-full">
@@ -89,8 +86,9 @@
               </ul>
 
               <a
-                href="#"
+                href="/coming-soon"
                 class="group relative ml-5 hidden h-[50.38px] w-[143.91px] shrink-0 items-center justify-center rounded-full border border-ico-red p-0.5 no-underline transition-colors hover:border-ico-red-hover hover:bg-ico-red-hover focus-visible:border-ico-red-hover focus-visible:bg-ico-red-hover min-[1270px]:inline-flex"
+                @click="onNavLinkClick($event, '/coming-soon')"
               >
                 <span class="flex h-full w-full items-center justify-center rounded-full font-rubik text-sm font-semibold tracking-wide text-white uppercase transition-colors group-hover:bg-ico-red-hover group-focus-visible:bg-ico-red-hover">
                   Whitepaper
@@ -98,21 +96,28 @@
               </a>
             </nav>
 
-            <div class="flex shrink-0 items-center">
-              <a href="#" class="icon-link flex items-center gap-0.5 px-4 text-base text-white/90 no-underline transition-colors hover:text-ico-red" aria-label="X">
-                <i class="fe fe-twitter text-base leading-none" aria-hidden="true" />
-              </a>
-              <a href="#" class="icon-link flex items-center gap-0.5 px-4 text-base text-white/90 no-underline transition-colors hover:text-ico-red" aria-label="Facebook">
-                <i class="fe fe-facebook text-base leading-none" aria-hidden="true" />
-              </a>
-              <button type="button" class="icon-link flex cursor-pointer items-center gap-0.5 border-0 bg-transparent px-4 text-base text-white/90 transition-colors hover:text-ico-red" aria-label="Search">
-                <i class="fe fe-search block h-4 w-[17px] text-base leading-4" aria-hidden="true" />
-              </button>
-              <a href="#" class="icon-link flex items-center gap-0.5 pr-0 pl-4 text-base text-white/90 no-underline transition-colors hover:text-ico-red" aria-label="Cart">
-                <i class="fe fe-shopping-cart block h-4 w-[17px] text-base leading-4" aria-hidden="true" />
-                <sup class="text-[10px] font-semibold">0</sup>
-              </a>
-            </div>
+            <ul class="relative m-0 flex shrink-0 list-none items-center p-0">
+              <li class="list-none">
+                <a href="#" class="icon-link flex items-center gap-0.5 px-4 text-base text-white/90 no-underline transition-colors" :class="iconHoverClass" aria-label="X">
+                  <i class="fe fe-twitter text-base leading-none" aria-hidden="true" />
+                </a>
+              </li>
+              <li class="list-none">
+                <a href="#" class="icon-link flex items-center gap-0.5 px-4 text-base text-white/90 no-underline transition-colors" :class="iconHoverClass" aria-label="Facebook">
+                  <i class="fe fe-facebook text-base leading-none" aria-hidden="true" />
+                </a>
+              </li>
+              <DojoHeaderSearchDropdown
+                :border-class="dropdownBorderClass"
+                :icon-hover-class="searchIconHoverClass"
+                :initial-query="navSearchQuery"
+                @submit="onHeaderSearchSubmit"
+              />
+              <DojoHeaderCartDropdown
+                :border-class="dropdownBorderClass"
+                :group-hover-text-class="groupHoverTextClass"
+              />
+            </ul>
           </div>
         </div>
       </div>
@@ -155,7 +160,7 @@
             v-for="section in navSections"
             :key="section.id"
             :section="section"
-            :expanded="expandedMenus[section.id]"
+            :expanded="isSectionExpanded(section.id)"
             :active-nav="activeNavState"
             @toggle="toggleSubmenu(section.id)"
             @nav-click="onNavLinkClick"
@@ -163,22 +168,35 @@
 
           <li>
             <a
-              href="#"
+              href="/coming-soon"
               class="flex min-h-[58px] w-full items-center p-[15px] font-rubik text-lg font-normal text-ink-muted no-underline transition-colors hover:text-ico-burgundy"
+              @click="onNavLinkClick($event, '/coming-soon')"
             ><span>Whitepaper</span></a>
           </li>
         </ul>
 
-        <form class="relative mt-2.5" role="search" @submit.prevent>
+        <form class="relative mt-2.5" role="search" @submit.prevent="onSearchSubmit">
           <label class="m-0 block">
             <span class="sr-only">Search for:</span>
             <input
+              v-model="searchQuery"
               type="search"
-              class="box-border h-[52px] w-full rounded-sm border-0 bg-surface-tint py-3.5 pr-12 pl-[15px] font-rubik text-base text-ink outline-none placeholder:text-[#8a8a8a]"
+              class="hide-search-cancel box-border h-[52px] w-full rounded-sm border border-transparent bg-surface-tint py-3.5 pl-[15px] font-rubik text-base text-ink outline-none placeholder:text-[#8a8a8a] focus:border-[#C82D00]"
+              :class="searchQuery ? 'pr-24' : 'pr-12'"
               placeholder="Search ..."
               name="s"
+              @input="menuFilterQuery = searchQuery"
             />
           </label>
+          <button
+            v-if="searchQuery"
+            type="button"
+            class="absolute top-0 right-12 flex h-[52px] w-10 cursor-pointer items-center justify-center border-0 bg-transparent text-[#C82D00]"
+            aria-label="Clear search"
+            @click="searchQuery = ''; menuFilterQuery = ''"
+          >
+            <i class="fe fe-x text-base leading-none" aria-hidden="true" />
+          </button>
           <button
             type="submit"
             class="absolute top-0 right-0 flex h-[52px] w-12 cursor-pointer items-center justify-center border-0 bg-transparent text-ink"
@@ -196,10 +214,13 @@
 <script setup lang="ts">
 import {
   createExpandedMenusState,
+  getNavSectionForPath,
+  getNavSectionsMatchingQuery,
   navSections,
   type NavId,
   type NavSectionId,
 } from '~/utils/navigation'
+import { buildSearchResultsPath } from '~/utils/search'
 
 const props = withDefaults(
   defineProps<{
@@ -247,16 +268,61 @@ async function onNavLinkClick(
   await navigateWithTransition(to)
 }
 
+async function onSearchSubmit() {
+  const query = searchQuery.value.trim()
+  if (!query) return
+
+  sideMenuOpen.value = false
+  await navigateWithTransition(buildSearchResultsPath(query))
+  searchQuery.value = ''
+}
+
 watch(() => route.path, () => {
   userNavSelection.value = null
 })
 
 const sideMenuOpen = ref(false)
+const searchQuery = ref('')
+const menuFilterQuery = ref('')
 const isScrolled = ref(false)
 const expandedMenus = reactive(createExpandedMenusState())
 
+const navSearchQuery = computed(() => {
+  if (route.path === '/search') return String(route.query.s ?? '').trim()
+  return ''
+})
+
+const dropdownBorderClass = computed(() =>
+  props.variant === 'ico' ? 'border-dojo-orange' : 'border-[#C82D00]',
+)
+const groupHoverTextClass = computed(() =>
+  props.variant === 'ico' ? 'group-hover:text-dojo-orange' : 'group-hover:text-[#C82D00]',
+)
+const searchIconHoverClass = computed(() =>
+  props.variant === 'ico'
+    ? 'group-hover/search:text-dojo-orange'
+    : 'group-hover/search:text-[#C82D00]',
+)
+const iconHoverClass = computed(() =>
+  props.variant === 'ico' ? 'hover:text-dojo-orange' : 'hover:text-ico-red',
+)
+async function onHeaderSearchSubmit(query: string) {
+  await navigateWithTransition(buildSearchResultsPath(query))
+  if (import.meta.client && route.path === '/search') {
+    await nextTick()
+    document.getElementById('search-results-content')?.scrollIntoView({ behavior: 'auto', block: 'start' })
+  }
+}
+
 function toggleSubmenu(menu: NavSectionId) {
   expandedMenus[menu] = !expandedMenus[menu]
+}
+
+function isSectionExpanded(sectionId: NavSectionId) {
+  if (menuFilterQuery.value.trim()) {
+    return getNavSectionsMatchingQuery(menuFilterQuery.value).includes(sectionId)
+  }
+  return expandedMenus[sectionId]
 }
 
 function updateScrollState() {
@@ -274,11 +340,17 @@ onBeforeUnmount(() => {
 
 watch(sideMenuOpen, (open) => {
   if (!open) {
+    searchQuery.value = ''
+    menuFilterQuery.value = ''
     for (const section of navSections) {
       expandedMenus[section.id] = false
     }
-  } else if (activeNavState.value === 'landings') {
-    expandedMenus.landings = true
+  } else {
+    searchQuery.value = navSearchQuery.value
+    menuFilterQuery.value = ''
+    const section = getNavSectionForPath(route.path)
+    if (section) expandedMenus[section] = true
+    else if (activeNavState.value === 'landings') expandedMenus.landings = true
   }
   if (import.meta.client) {
     document.body.style.overflow = open ? 'hidden' : ''

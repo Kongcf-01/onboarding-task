@@ -34,20 +34,27 @@ const LIGHT_SECTION_SELECTOR =
 
 const SIDE_MENU_SELECTOR = '#dojochain-side-menu'
 
-const SCROLL_RAIL_SELECTOR = '#dojo-scroll-hint, #dojo-scroll-gotop'
+const SCROLL_RAIL_SELECTOR = '#dojo-scroll-gotop'
 
 const HOVER_TARGET_SELECTOR =
   'a, button, [role="button"], input, select, textarea, label, .nav-link, .whitepaper-btn, .icon-link, .menu-toggle'
 
-const isIcoHome = computed(() => {
+const CURSOR_EXCLUDED_PATHS = new Set(['/privacy'])
+const MOBILE_MEDIA_QUERY = '(max-width: 1269px)'
+
+const isMobileViewport = ref(false)
+
+const showCustomCursor = computed(() => {
   const path = route.path.replace(/\/$/, '') || '/'
-  return path === '/' || path === '/coming-soon'
+  if (CURSOR_EXCLUDED_PATHS.has(path)) return false
+  if (isMobileViewport.value) return false
+  return true
 })
 
 const inScrollRail = ref(false)
 
 const showCursor = computed(
-  () => ready.value && hasMoved.value && isIcoHome.value && !inSideMenu.value && !inScrollRail.value,
+  () => ready.value && hasMoved.value && showCustomCursor.value && !inSideMenu.value && !inScrollRail.value,
 )
 
 function updateRingTone(clientX: number, clientY: number, target?: EventTarget | null) {
@@ -78,7 +85,7 @@ function onLeave() {
 function start() {
   if (!import.meta.client) return
   if (!window.matchMedia('(pointer: fine)').matches) return
-  if (!isIcoHome.value) return
+  if (!showCustomCursor.value) return
 
   ready.value = true
   window.addEventListener('mousemove', onMove, { passive: true })
@@ -96,16 +103,28 @@ function stop() {
   document.documentElement.removeEventListener('mouseleave', onLeave)
 }
 
-watch(isIcoHome, (home) => {
-  if (home) start()
+let mobileMediaQuery: MediaQueryList | null = null
+
+function onMobileViewportChange(event: MediaQueryListEvent) {
+  isMobileViewport.value = event.matches
+}
+
+watch(showCustomCursor, (enabled) => {
+  if (enabled) start()
   else stop()
 })
 
 onMounted(() => {
+  if (import.meta.client) {
+    mobileMediaQuery = window.matchMedia(MOBILE_MEDIA_QUERY)
+    isMobileViewport.value = mobileMediaQuery.matches
+    mobileMediaQuery.addEventListener('change', onMobileViewportChange)
+  }
   start()
 })
 
 onBeforeUnmount(() => {
+  mobileMediaQuery?.removeEventListener('change', onMobileViewportChange)
   stop()
 })
 </script>

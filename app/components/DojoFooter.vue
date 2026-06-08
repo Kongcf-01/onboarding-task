@@ -11,7 +11,7 @@
           </h5>
           <ul class="m-0 list-none p-0">
             <li class="py-3 leading-[1.4] max-lg:py-2.5 before:mr-2 before:inline-block before:text-sm before:leading-none before:text-white before:content-['→']">
-              <a href="#" class="text-[#929292] no-underline transition-colors duration-200 hover:text-white">Whitepaper</a>
+              <a href="/coming-soon" class="text-[#929292] no-underline transition-colors duration-200 hover:text-white">Whitepaper</a>
             </li>
             <li class="py-3 leading-[1.4] max-lg:py-2.5 before:mr-2 before:inline-block before:text-sm before:leading-none before:text-white before:content-['→']">
               <a href="#" class="text-[#929292] no-underline transition-colors duration-200 hover:text-white">Press</a>

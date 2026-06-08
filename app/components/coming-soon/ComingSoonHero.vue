@@ -1,5 +1,5 @@
 <template>
-  <ComingSoonDojoSkyBg>
+  <ComingSoonDojoSkyBg class="h-full">
     <div class="box-border w-full py-[60px]">
       <div class="flex w-full items-stretch">
         <div class="w-full text-left min-[768px]:w-[50.359%]">
@@ -27,7 +27,7 @@
               v-for="social in socialLinks"
               :key="social.label"
               href="#"
-              class="mr-4 text-white no-underline transition-opacity hover:opacity-75"
+              class="mr-4 text-white no-underline transition-colors duration-200 hover:text-ico-red"
               :aria-label="social.label"
             >
               <i :class="social.icon" class="block text-[1.35rem] leading-none" aria-hidden="true" />

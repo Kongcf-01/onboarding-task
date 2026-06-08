@@ -18,7 +18,7 @@
           :class="[
             index < section.items.length - 1 ? 'border-b border-[#e8e8e8]' : '',
             item.to ? 'menu-button' : '',
-            item.nav && activeNav === item.nav ? 'text-ico-red' : '',
+            isNavItemActive(item, route.path, activeNav) ? 'text-ico-red' : '',
           ]"
           @click="onItemClick($event, item)"
         >{{ item.label }}</a>
@@ -28,12 +28,14 @@
 </template>
 
 <script setup lang="ts">
-import type { NavId, NavItem, NavSection } from '~/utils/navigation'
+import { isNavItemActive, type NavId, type NavItem, type NavSection } from '~/utils/navigation'
 
 defineProps<{
   section: NavSection
   activeNav: NavId | null
 }>()
+
+const route = useRoute()
 
 const emit = defineEmits<{
   'nav-click': [event: MouseEvent, to: string, nav?: NavId]

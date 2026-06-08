@@ -3,10 +3,10 @@
     <!-- Home Demos -->
     <section id="demos" class="bg-white pt-12 pb-8">
       <div class="mx-auto max-w-[1320px] px-6 text-center">
-        <h2 class="font-montserrat text-[clamp(2rem,4vw,3rem)] font-medium tracking-[1.4px] text-dojo-text-dark">
+        <h2 class="font-montserrat text-[clamp(3rem,4vw,3rem)] font-medium tracking-[1.4px] text-dojo-text-dark">
           Home Demos
         </h2>
-        <p class="mb-4 font-montserrat text-2xl leading-[0.9] text-dojo-text-muted">
+        <p class="mb-4 font-montserrat text-2xl leading-[2.9] text-dojo-text-muted">
           Get started with a pre-made website
         </p>
       </div>
@@ -59,7 +59,7 @@
             :key="feature.title"
             data-reveal-group="features"
             :class="[revealUp, 'text-center']"
-            :style="{ '--reveal-delay': `${i * 200}ms` }"
+            :style="revealDelay(i * 200)"
           >
             <div class="mx-auto mb-5 flex size-16 items-center justify-center text-white [&_svg]:size-16">
               <HomeFeatureIcon :index="i" />
@@ -190,41 +190,7 @@
           <span class="block">about us</span>
         </h2>
 
-        <div class="mx-auto max-w-[820px]">
-          <img
-            src="/images/home/envato-avatar.png"
-            alt=""
-            class="mx-auto mb-6 size-20 rounded-full"
-            width="80"
-            height="80"
-          />
-          <p class="font-montserrat text-lg leading-[1.9] text-[#3a3a3a]">
-            {{ homeTestimonials[activeTestimonial].quote }}
-          </p>
-          <h5 class="mt-6 font-montserrat text-base font-semibold text-black">
-            {{ homeTestimonials[activeTestimonial].author }}
-          </h5>
-
-          <div class="mt-10 flex items-center justify-center gap-0">
-            <div class="flex items-center">
-              <button
-                v-for="(_, i) in homeTestimonials"
-                :key="i"
-                type="button"
-                class="relative px-4 py-2 font-rubik text-2xl transition-colors"
-                :class="activeTestimonial === i ? 'text-[#d00027]' : 'text-[#d00027]/40 hover:text-[#d00027]/70'"
-                @click="activeTestimonial = i"
-              >
-                <span>{{ i + 1 }}</span>
-                <span
-                  v-if="activeTestimonial === i"
-                  class="absolute bottom-0 left-1/2 h-px w-8 -translate-x-1/2 bg-[#d00027]"
-                />
-              </button>
-            </div>
-            <span class="ml-2 font-rubik text-2xl text-[#d00027]">{{ homeTestimonials.length }}</span>
-          </div>
-        </div>
+        <HomeTestimonials :testimonials="homeTestimonials" />
       </div>
     </section>
 
@@ -298,27 +264,34 @@
       </div>
     </section>
 
-    <!-- CTA -->
-    <section class="bg-black py-12 text-center">
+    <!-- CTA (reference: section py-12=128px, h2 48px Montserrat, button wrap mb-5 pb-12) -->
+    <section class="overflow-hidden bg-black py-32 text-center">
       <div class="mx-auto max-w-[1320px] px-6">
-        <h2 class="font-montserrat text-lg leading-[1.9] text-white">
-          Put Your Content At Its Best
-        </h2>
-        <h2 class="my-6 font-montserrat text-[clamp(2rem,4vw,3rem)] font-semibold tracking-[1.4px] text-white">
-          Get started with DojoChain now!
-        </h2>
-        <HomeBtn
-          :href="themeForestUrl"
-          variant="primary"
-          label="Buy Now for $59"
-        />
-        <p class="mt-8 font-montserrat text-[#d3d3d3]">
+        <div class="mb-12">
+          <h2 class="mb-0 text-center font-montserrat text-lg font-normal leading-[1.9] text-white">
+            Put Your Content At Its Best
+          </h2>
+          <h2 class="mb-6 mt-6 text-center font-montserrat text-5xl font-semibold leading-[1.2] tracking-[1.4px] text-white">
+            <span class="block">Get started with</span>
+            <span class="block">DojoChain now!</span>
+          </h2>
+        </div>
+
+        <div class="mb-5 pb-12">
+          <HomeBtn
+            :href="themeForestUrl"
+            variant="primary"
+            label="Buy Now for $59"
+          />
+        </div>
+
+        <p class="text-center font-montserrat text-base font-normal text-[#d3d3d3]">
           Made with
           <span class="text-dojo-orange">♥</span>
           by
-          <a href="#" class="text-[#d3d3d3] no-underline hover:text-white">ThemesDojo</a>.
+          <a href="#" class="text-dojo-orange no-underline hover:text-dojo-orange-dark">ThemesDojo</a>.
           Powered by
-          <a href="#" class="text-[#d3d3d3] no-underline hover:text-white">WordPress</a>.
+          <a href="#" class="text-dojo-orange no-underline hover:text-dojo-orange-dark">WordPress</a>.
         </p>
       </div>
     </section>
@@ -326,7 +299,7 @@
 </template>
 
 <script setup lang="ts">
-import { revealUp } from '~/utils/reveal'
+import { revealDelay, revealUp } from '~/utils/reveal'
 import {
   customizableChecklist,
   elementorChecklist,
@@ -338,6 +311,5 @@ import {
   wooChecklist,
 } from '~/utils/homeContent'
 
-const activeTestimonial = ref(0)
 const openFaq = ref(0)
 </script>

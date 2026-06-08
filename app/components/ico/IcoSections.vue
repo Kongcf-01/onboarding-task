@@ -22,19 +22,18 @@
             <img
               src="/images/ico-about-icon.svg"
               alt=""
-              :class="[revealUp, 'mb-4 block size-16']"
-              style="--reveal-delay: 0ms"
+              :class="[revealUp, 'mb-4 block size-16 [--reveal-delay:0ms]']"
               width="64"
               height="64"
               aria-hidden="true"
             />
-            <h2 :class="[revealUp, 'mb-5 font-rubik text-[clamp(1.75rem,3vw,48px)] font-semibold leading-[1.2] tracking-[1.4px] text-white xl:mb-6']" style="--reveal-delay: 680ms">
+            <h2 :class="[revealUp, 'mb-5 font-rubik text-[clamp(1.75rem,3vw,48px)] font-semibold leading-[1.2] tracking-[1.4px] text-white xl:mb-6 [--reveal-delay:680ms]']">
               About DojoChain Platform
             </h2>
-            <p :class="[revealUp, 'mb-6 max-w-full font-montserrat text-lg font-normal leading-[1.9em] text-[#dce2f4] xl:box-border xl:min-h-[171px] xl:max-w-[529px]']" style="--reveal-delay: 800ms">
+            <p :class="[revealUp, 'mb-6 max-w-full font-montserrat text-lg font-normal leading-[1.9em] text-[#dce2f4] xl:box-border xl:min-h-[171px] xl:max-w-[529px] [--reveal-delay:800ms]']">
               As music fans, we also endure terrible experiences. Fans are often forced to switch between dozens of streaming services just to listen to artists they like. Music industry fragmentation has resulted from streaming services competing for exclusive deals.
             </p>
-            <ul :class="[revealUp, 'mb-8 list-none']" style="--reveal-delay: 920ms">
+            <ul :class="[revealUp, 'mb-8 list-none [--reveal-delay:920ms]']">
               <li v-for="item in aboutList" :key="item" class="flex items-center gap-0 py-[0.35rem] font-rubik text-xl font-medium text-[#dce2f4]">
                 <i class="fas fa-check w-5 shrink-0 text-center text-sm text-ico-icon-light" aria-hidden="true" />
                 <span class="pl-3.5">{{ item }}</span>
@@ -42,18 +41,16 @@
             </ul>
             <IcoBtn
               href="#"
-              :class="revealUp"
-              style="--reveal-delay: 1040ms"
+              :class="[revealUp, '[--reveal-delay:1040ms]']"
             >
               Learn More
             </IcoBtn>
           </div>
 
           <div
-            :class="[revealLeft, 'col-start-1 row-start-3 min-w-0 overflow-hidden rounded-md lg:col-start-1 lg:row-start-2 xl:relative xl:col-start-1 xl:row-start-2 xl:min-h-0 xl:self-stretch']"
+            :class="[revealLeft, 'col-start-1 row-start-3 min-w-0 overflow-hidden rounded-md lg:col-start-1 lg:row-start-2 xl:relative xl:col-start-1 xl:row-start-2 xl:min-h-0 xl:self-stretch [--reveal-delay:0ms]']"
             data-reveal-group="tech"
             data-reveal-trigger="tech"
-            style="--reveal-delay: 0ms"
           >
             <img
               src="https://dojochain.fantasythemes.net/wp-content/uploads/2021/06/the-technology.jpg"
@@ -66,10 +63,9 @@
           </div>
 
           <div
-            :class="[revealRight, 'col-start-1 row-start-1 min-w-0 overflow-hidden rounded-md lg:col-start-2 lg:row-start-1 xl:relative xl:col-start-3 xl:row-start-1 xl:min-h-0 xl:self-stretch']"
+            :class="[revealRight, 'col-start-1 row-start-1 min-w-0 overflow-hidden rounded-md lg:col-start-2 lg:row-start-1 xl:relative xl:col-start-3 xl:row-start-1 xl:min-h-0 xl:self-stretch [--reveal-delay:0ms]']"
             data-reveal-group="about"
             data-reveal-trigger="about"
-            style="--reveal-delay: 0ms"
           >
             <img
               src="https://dojochain.fantasythemes.net/wp-content/uploads/2021/06/about-cryptoroyal.jpg"
@@ -88,19 +84,18 @@
             <img
               src="/images/ico-tech-icon.svg"
               alt=""
-              :class="[revealUp, 'mb-4 block size-16']"
-              style="--reveal-delay: 0ms"
+              :class="[revealUp, 'mb-4 block size-16 [--reveal-delay:0ms]']"
               width="64"
               height="64"
               aria-hidden="true"
             />
-            <h2 :class="[revealUp, 'mb-5 font-rubik text-[clamp(1.75rem,3vw,48px)] font-semibold leading-[1.2] tracking-[1.4px] text-white xl:mb-6']" style="--reveal-delay: 680ms">
+            <h2 :class="[revealUp, 'mb-5 font-rubik text-[clamp(1.75rem,3vw,48px)] font-semibold leading-[1.2] tracking-[1.4px] text-white xl:mb-6 [--reveal-delay:680ms]']">
               The Technology
             </h2>
-            <p :class="[revealUp, 'mb-6 max-w-full font-montserrat text-lg font-normal leading-[1.9em] text-[#dce2f4] xl:box-border xl:min-h-[239.4px] xl:max-w-[529px]']" style="--reveal-delay: 800ms">
+            <p :class="[revealUp, 'mb-6 max-w-full font-montserrat text-lg font-normal leading-[1.9em] text-[#dce2f4] xl:box-border xl:min-h-[239.4px] xl:max-w-[529px] [--reveal-delay:800ms]']">
               With this system, we are able to store songs permanently and transparently, using cutting-edge low latency IPFS as the storage layer. DojoChain network is controlled by an Ethereum-based logic layer. The Universal Music Registry Number (UMRN) relay will maintain a global recording and tracking system, and the DojoChain API will allow any player to use the service.
             </p>
-            <ul :class="[revealUp, 'mb-8 list-none']" style="--reveal-delay: 920ms">
+            <ul :class="[revealUp, 'mb-8 list-none [--reveal-delay:920ms]']">
               <li v-for="item in techList" :key="item" class="flex items-center gap-0 py-[0.35rem] font-rubik text-xl font-medium text-[#dce2f4]">
                 <i class="fas fa-check w-5 shrink-0 text-center text-sm text-ico-icon-light" aria-hidden="true" />
                 <span class="pl-3.5">{{ item }}</span>
@@ -108,8 +103,7 @@
             </ul>
             <IcoBtn
               href="#"
-              :class="revealUp"
-              style="--reveal-delay: 1040ms"
+              :class="[revealUp, '[--reveal-delay:1040ms]']"
             >
               Learn More
             </IcoBtn>
@@ -129,9 +123,8 @@
         data-reveal-trigger="benefits"
       >
         <h2
-          :class="[revealUp, 'mb-[clamp(1.5rem,4vw,2.5rem)] w-full text-center font-rubik text-[clamp(2rem,8vw,56px)] font-semibold leading-[1.4] tracking-[1.4px] text-white lg:mb-10']"
+          :class="[revealUp, 'mb-[clamp(1.5rem,4vw,2.5rem)] w-full text-center font-rubik text-[clamp(2rem,8vw,56px)] font-semibold leading-[1.4] tracking-[1.4px] text-white lg:mb-10 [--reveal-delay:0ms]']"
           data-reveal-group="benefits"
-          style="--reveal-delay: 0ms"
         >
           Benefits
         </h2>
@@ -141,7 +134,7 @@
             :key="card.title"
             data-reveal-group="benefits"
             :class="[revealUpSlow, 'block min-w-0 w-full cursor-pointer overflow-hidden rounded-md bg-ico-blue-section px-[clamp(20px,5vw,48px)] pt-[clamp(24px,5vw,48px)] pb-[clamp(20px,4vw,32px)] text-white box-border transition-colors duration-200 hover:bg-ico-blue lg:px-12 lg:pt-12 lg:pb-8 hover:[&_.benefit-title]:text-white hover:[&_.benefit-desc]:text-white']"
-            :style="{ '--reveal-delay': `${(index + 1) * 400}ms` }"
+            :style="revealDelay((index + 1) * 400)"
           >
             <span class="mb-[clamp(0.75rem,2vw,1rem)] block size-[72px] lg:mb-4" aria-hidden="true">
               <img :src="card.icon" alt="" width="72" height="72" class="block size-[72px] object-contain" />
@@ -269,7 +262,7 @@
         <p class="mx-auto mb-0 max-w-[640px] px-2.5 pb-20 text-center font-montserrat text-lg font-normal leading-[1.9] text-ico-text-light box-border" data-reveal-trigger="team">
           Meet Our Small But Passionate Team
         </p>
-        <div class="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-7 xl:grid-cols-3 xl:gap-8']">
+        <div class="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-7 xl:grid-cols-3 xl:gap-8">
           <article
             v-for="(member, index) in team"
             :key="member.name"
@@ -278,7 +271,7 @@
             <div
               :class="[revealUp, 'relative overflow-hidden rounded-md after:pointer-events-none after:absolute after:inset-0 after:z-[1] after:bg-[linear-gradient(to_top,rgba(0,0,0,0.72)_0%,rgba(0,0,0,0.35)_35%,transparent_65%)]']"
               data-reveal-group="team"
-              :style="{ '--reveal-delay': `${teamCardDelay(index)}ms` }"
+              :style="revealDelay(teamCardDelay(index))"
             >
               <img
                 :src="member.image"
@@ -313,9 +306,8 @@
     >
       <div class="mx-auto max-w-[1200px] px-6" data-reveal-trigger="featured">
         <h2
-          :class="[revealUp, 'mb-32 text-center font-rubik text-[56px] font-semibold tracking-[1.4px] text-white max-md:mb-16 max-md:text-[clamp(2rem,8vw,56px)]']"
+          :class="[revealUp, 'mb-32 text-center font-rubik text-[56px] font-semibold tracking-[1.4px] text-white max-md:mb-16 max-md:text-[clamp(2rem,8vw,56px)] [--reveal-delay:0ms]']"
           data-reveal-group="featured"
-          style="--reveal-delay: 0ms"
         >
           Featured In
         </h2>
@@ -329,7 +321,7 @@
               <div
                 :class="[revealUp, 'inline-flex size-[218.43px] h-[280px] items-center justify-center px-3 py-20 text-center align-top font-rubik text-base text-[#1a1a1a] box-border']"
                 data-reveal-group="featured"
-                :style="{ '--reveal-delay': `${featuredBrandDelay(index)}ms` }"
+                :style="revealDelay(featuredBrandDelay(index))"
               >
                 <img :src="src" alt="" loading="lazy" class="mx-auto block h-auto max-h-[120px] w-auto max-w-full object-contain" />
               </div>
@@ -366,7 +358,7 @@
 </template>
 
 <script setup lang="ts">
-import { revealLeft, revealRight, revealUp, revealUpSlow } from '~/utils/reveal'
+import { revealDelay, revealLeft, revealRight, revealUp, revealUpSlow } from '~/utils/reveal'
 
 const musicRevSection = ref<HTMLElement | null>(null)
 const { animReady: splitAnimReady } = useIcoScrollReveal(musicRevSection)

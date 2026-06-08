@@ -2,7 +2,7 @@
   <ClientOnly>
     <Teleport to="body">
       <div
-        v-show="showOnHome"
+        v-show="show"
         class="fixed top-auto left-5 bottom-5 z-[999] h-auto w-[calc(100%-40px)] max-w-[380px] rounded-md bg-ico-red p-[2.083vw] font-rubik font-normal text-white transition-[opacity,visibility,bottom] duration-300 ease-[cubic-bezier(0.33,1,0.68,1)]"
         :class="show ? 'visible bottom-5 opacity-100' : 'pointer-events-none invisible bottom-0 opacity-0'"
         role="dialog"
@@ -55,16 +55,14 @@ const route = useRoute()
 
 const show = ref(true)
 
-const showOnHome = computed(() => route.path === '/' || route.path === '/coming-soon')
-
 function dismiss() {
   show.value = false
 }
 
 watch(
   () => route.path,
-  (path) => {
-    if (path === '/' || path === '/coming-soon') show.value = true
+  () => {
+    show.value = true
   },
 )
 </script>

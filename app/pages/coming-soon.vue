@@ -1,5 +1,6 @@
 <template>
   <div class="h-screen max-h-screen overflow-hidden bg-[#111] text-white">
+    <DojoHeader variant="default" />
     <ComingSoonHero />
   </div>
 </template>

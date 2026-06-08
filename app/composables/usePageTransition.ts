@@ -38,6 +38,12 @@ export function usePageTransition() {
       showCurtain.value = true
       if (action) await action()
       await wait(CURTAIN_MS)
+      if (import.meta.client) {
+        await nextTick()
+        if (!window.location.pathname.startsWith('/search')) {
+          window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+        }
+      }
     } finally {
       phase.value = 'hidden'
       animating.value = false
@@ -48,7 +54,7 @@ export function usePageTransition() {
 
   async function navigateWithTransition(to: string) {
     const router = useRouter()
-    if (to === router.currentRoute.value.path) {
+    if (to === router.currentRoute.value.fullPath) {
       await runTransition()
       return
     }

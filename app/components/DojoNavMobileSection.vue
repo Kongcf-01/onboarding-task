@@ -22,13 +22,14 @@
           v-if="item.to"
           :href="item.to"
           class="menu-button flex h-11 min-h-11 w-full items-center py-3 pr-4 pl-[30px] font-rubik text-base font-normal no-underline transition-colors hover:text-ico-burgundy"
-          :class="item.nav && activeNav === item.nav ? 'text-ico-red' : 'text-ink-muted'"
+          :class="itemClass(item)"
           @click="emit('nav-click', $event, item.to, item.nav)"
         ><span>{{ item.label }}</span></a>
         <a
           v-else
           href="#"
-          class="flex h-11 min-h-11 w-full items-center py-3 pr-4 pl-[30px] font-rubik text-base font-normal text-ink-muted no-underline transition-colors hover:text-ico-burgundy"
+          class="flex h-11 min-h-11 w-full items-center py-3 pr-4 pl-[30px] font-rubik text-base font-normal no-underline transition-colors hover:text-ico-burgundy"
+          :class="itemClass(item)"
         ><span>{{ item.label }}</span></a>
       </li>
     </ul>
@@ -36,13 +37,27 @@
 </template>
 
 <script setup lang="ts">
-import type { NavId, NavSection } from '~/utils/navigation'
+import {
+  isNavItemActive,
+  type NavId,
+  type NavItem,
+  type NavSection,
+} from '~/utils/navigation'
 
-defineProps<{
+const props = defineProps<{
   section: NavSection
   expanded: boolean
   activeNav: NavId | null
 }>()
+
+function itemClass(item: NavItem) {
+  if (item.to && isNavItemActive(item, route.path, props.activeNav)) {
+    return 'text-ico-red'
+  }
+  return 'text-ink-muted'
+}
+
+const route = useRoute()
 
 const emit = defineEmits<{
   toggle: []
