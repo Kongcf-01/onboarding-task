@@ -17,7 +17,7 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
-      title: 'DojoChain – ICO Landing | Music Platform Based on Blockchain',
+      title: 'DojoChain – Cryptocurrency Consulting WordPress Theme',
       link: [
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
