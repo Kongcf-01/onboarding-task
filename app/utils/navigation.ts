@@ -84,6 +84,24 @@ export function getNavSectionForPath(path: string): NavSectionId | null {
   return null
 }
 
+function getNavTermVariants(term: string): string[] {
+  const variants = new Set<string>([term])
+  if (term.endsWith('s') && term.length > 2) variants.add(term.slice(0, -1))
+  else if (term.length > 1) variants.add(`${term}s`)
+  return [...variants]
+}
+
+function navTextMatchesTokens(text: string, tokens: string[]): boolean {
+  const normalized = text.toLowerCase()
+  const words: string[] = normalized.match(/[a-z0-9]+/g) ?? []
+
+  return tokens.every((token) =>
+    getNavTermVariants(token).some(
+      (variant) => normalized.includes(variant) || words.includes(variant),
+    ),
+  )
+}
+
 export function getNavSectionsMatchingQuery(query: string): NavSectionId[] {
   const normalized = query.trim().toLowerCase()
   if (!normalized) return []
@@ -92,9 +110,9 @@ export function getNavSectionsMatchingQuery(query: string): NavSectionId[] {
   const matchingSections = new Set<NavSectionId>()
 
   for (const section of navSections) {
-    const sectionMatches = tokens.every((token) => section.label.toLowerCase().includes(token))
+    const sectionMatches = navTextMatchesTokens(section.label, tokens)
     const itemMatches = section.items.some((item) =>
-      tokens.every((token) => item.label.toLowerCase().includes(token)),
+      navTextMatchesTokens(item.label, tokens),
     )
 
     if (sectionMatches || itemMatches) {
@@ -110,14 +128,5 @@ export function isNavItemMatchingQuery(item: NavItem, query: string): boolean {
   if (!normalized) return false
 
   const terms = normalized.split(' ').filter(Boolean)
-  const label = item.label.toLowerCase()
-  const labelWords: string[] = label.match(/[a-z0-9]+/g) ?? []
-
-  if (terms.length === 1) {
-    const term = terms[0]
-    return Boolean(term && labelWords.includes(term))
-  }
-
-  if (label.includes(normalized)) return true
-  return terms.every((term) => labelWords.includes(term))
+  return navTextMatchesTokens(item.label, terms)
 }

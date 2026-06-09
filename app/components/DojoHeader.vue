@@ -96,7 +96,7 @@
               </a>
             </nav>
 
-            <ul class="relative m-0 flex shrink-0 list-none items-center p-0">
+            <ul class="relative m-0 ml-6 flex shrink-0 list-none items-center p-0">
               <li class="list-none">
                 <a href="#" class="icon-link flex items-center gap-0.5 px-4 text-base text-white/90 no-underline transition-colors" :class="iconHoverClass" aria-label="X">
                   <i class="fe fe-twitter text-base leading-none" aria-hidden="true" />
@@ -115,7 +115,7 @@
               />
               <DojoHeaderCartDropdown
                 :border-class="dropdownBorderClass"
-                :group-hover-text-class="groupHoverTextClass"
+                :icon-hover-class="cartIconHoverClass"
               />
             </ul>
           </div>
@@ -295,13 +295,11 @@ const navSearchQuery = computed(() => {
 const dropdownBorderClass = computed(() =>
   props.variant === 'ico' ? 'border-dojo-orange' : 'border-[#C82D00]',
 )
-const groupHoverTextClass = computed(() =>
+const cartIconHoverClass = computed(() =>
   props.variant === 'ico' ? 'group-hover:text-dojo-orange' : 'group-hover:text-[#C82D00]',
 )
 const searchIconHoverClass = computed(() =>
-  props.variant === 'ico'
-    ? 'group-hover/search:text-dojo-orange'
-    : 'group-hover/search:text-[#C82D00]',
+  props.variant === 'ico' ? 'group-hover:text-dojo-orange' : 'group-hover:text-[#C82D00]',
 )
 const iconHoverClass = computed(() =>
   props.variant === 'ico' ? 'hover:text-dojo-orange' : 'hover:text-ico-red',

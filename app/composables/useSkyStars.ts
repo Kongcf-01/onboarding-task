@@ -81,18 +81,8 @@ export function useSkyStars(containerRef: Ref<HTMLElement | null>) {
     }
     animate()
 
-    const onResize = () => {
-      const nextWidth = window.innerWidth
-      const nextHeight = window.innerHeight
-      camera.aspect = nextWidth / nextHeight
-      camera.updateProjectionMatrix()
-      renderer.setSize(nextWidth, nextHeight)
-    }
-    window.addEventListener('resize', onResize, { passive: true })
-
     dispose = () => {
       window.cancelAnimationFrame(frameId)
-      window.removeEventListener('resize', onResize)
       renderer.domElement.remove()
       geometry.dispose()
       material.dispose()

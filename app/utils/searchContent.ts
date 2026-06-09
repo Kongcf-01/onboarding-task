@@ -36,7 +36,7 @@ export const searchableEntries: SearchResultEntry[] = [
     author: 'DojoChain',
     date: 'July 5, 2021',
     comments: 0,
-    keywords: 'our services smart contracts blockchain development exchanges training wallets audit',
+    keywords: 'our service our services smart contracts blockchain development exchanges training wallets audit',
   },
   {
     title: 'Fintech Company',

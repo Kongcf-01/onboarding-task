@@ -2,8 +2,8 @@
   <li class="shopping-cart-menu-btn group relative shrink-0 list-none">
     <a
       href="#"
-      class="icon-link flex cursor-default items-center gap-0.5 pr-0 pl-4 text-base text-white/90 no-underline transition-colors"
-      :class="groupHoverTextClass"
+      class="icon-link flex cursor-pointer items-center gap-0.5 pr-0 pl-4 text-base text-white/90 no-underline transition-colors duration-150"
+      :class="iconHoverClass"
       aria-label="Cart"
       @click.prevent
     >
@@ -12,13 +12,14 @@
     </a>
 
     <div
-      class="pointer-events-none absolute top-[calc(100%+15px)] -right-[30px] z-[999] w-[420px] opacity-0 transition-opacity duration-200 before:absolute before:-top-[15px] before:right-0 before:left-0 before:h-[15px] before:content-[''] group-hover:pointer-events-auto group-hover:opacity-100"
+      class="invisible absolute top-full -right-[30px] z-[999] w-[360px] opacity-0 transition-opacity duration-150 ease-out group-hover:visible group-hover:opacity-100"
     >
+      <div class="h-6 shrink-0" aria-hidden="true" />
       <div
-        class="rounded-b-lg border-t-4 bg-white p-10 shadow-[0_0_35px_rgba(0,0,0,0.1)]"
+        class="rounded-b-lg border-t-4 bg-white p-6 shadow-[0_0_35px_rgba(0,0,0,0.1)]"
         :class="borderClass"
       >
-        <p class="m-0 mb-5 font-rubik text-lg font-semibold text-ink">
+        <p class="m-0 mb-3 font-rubik text-base font-semibold text-ink">
           Cart review
         </p>
         <div class="widget-shopping-cart-content">
@@ -34,6 +35,6 @@
 <script setup lang="ts">
 defineProps<{
   borderClass: string
-  groupHoverTextClass: string
+  iconHoverClass: string
 }>()
 </script>
