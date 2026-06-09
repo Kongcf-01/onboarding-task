@@ -58,7 +58,9 @@ export function usePageTransition() {
       await runTransition()
       return
     }
-    await runTransition(() => router.push(to))
+    await runTransition(async () => {
+      void (await router.push(to))
+    })
   }
 
   async function playInitialPreloader() {
